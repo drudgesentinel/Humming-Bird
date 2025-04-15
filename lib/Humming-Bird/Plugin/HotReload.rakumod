@@ -43,9 +43,9 @@ class Humming-Bird::Backend::HotReload does Humming-Bird::Backend {
             whenever signal(SIGINT) { $temp-file.IO.unlink; exit; }
             whenever Supply.interval(1, 2) {
                 if ($!should-refresh) {
-                    say 'File change detected, refreshing Humming-Bird...';
                     self!kill-server();
                     self!start-server();
+                    say 'File change detected, refreshed Humming-Bird...';
                     $!should-refresh = False;
                 }
             }
